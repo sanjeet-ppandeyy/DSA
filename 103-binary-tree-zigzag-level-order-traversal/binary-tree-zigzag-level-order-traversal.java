@@ -1,18 +1,21 @@
 class Solution {
-
-    public void nthLevel(TreeNode root, List<Integer> ans, int n,int t) {
+    public void nthLevel1(TreeNode root, List<Integer> ans, int n) {
         if (root == null) return;
         if (n == 1) {
             ans.add(root.val);
             return;
         }
-        if (t%2 != 0) {
-            nthLevel(root.left, ans, n - 1,t);
-            nthLevel(root.right, ans, n - 1,t);
-        } else {
-            nthLevel(root.right, ans, n - 1,t);
-            nthLevel(root.left, ans, n - 1,t);
+            nthLevel1(root.left, ans, n - 1);
+            nthLevel1(root.right, ans, n - 1);
         }
+    public void nthLevel2(TreeNode root, List<Integer> ans, int n) {
+        if (root == null) return;
+        if (n == 1) {
+            ans.add(root.val);
+            return;
+        }
+            nthLevel2(root.right, ans, n - 1);
+            nthLevel2(root.left, ans, n - 1);
     }
 
     public int height(TreeNode root) {
@@ -26,7 +29,8 @@ class Solution {
 
         for (int i = 1; i <= h; i++) {
             List<Integer> result = new ArrayList<>();
-            nthLevel(root, result, i,i);
+            if(i%2 != 0) nthLevel1(root, result, i);
+            else nthLevel2(root, result, i);
             ans.add(result);
         }
         return ans;
