@@ -1,13 +1,29 @@
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        ArrayList<Integer> ans = new ArrayList<>();
-        inOrder(root,ans);
+        //Morris traversal
+        List<Integer> ans = new ArrayList<>();
+        TreeNode curr = root;
+        while(curr != null){
+            if(curr.left != null){
+                TreeNode pred = curr.left;
+                while(pred.right != null && pred.right != curr){
+                    pred = pred.right;
+                }
+                if(pred.right == null){
+                    pred.right = curr;
+                    curr = curr.left;
+                }
+                if(pred.right == curr){
+                    pred.right = null;
+                    ans.add(curr.val);
+                    curr = curr.right;
+                }
+            }
+            else{
+                ans.add(curr.val);
+                curr = curr.right;
+            }
+        }
         return ans;
-    }
-    public void inOrder(TreeNode root,ArrayList<Integer> ans){
-        if(root == null) return;
-        inOrder(root.left,ans);
-        ans.add(root.val);
-        inOrder(root.right,ans);
     }
 }
