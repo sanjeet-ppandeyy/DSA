@@ -3,17 +3,15 @@ class Solution {
         int n = nums.length;
         int m = nums[0].length;
         int ans = 0;
-
         for(int i=0; i<n; i++){
             Arrays.sort(nums[i]);
         }
-
         for(int i=0; i<m; i++){
-            PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+            int max = 0;
             for(int j=0; j<n; j++){
-                pq.add(nums[j][i]);
+                max = Math.max(max,nums[j][i]);
             }
-            ans += pq.peek();
+            ans += max;
         }
         return ans;
     }
