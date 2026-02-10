@@ -20,7 +20,9 @@ class Solution {
         }
         for(char key : mp1.keySet()){
             if(!mp2.containsKey(key)) return false;
-            if(!mp1.get(key).equals(mp2.get(key))) return false;
+            int val1 = mp1.get(key);
+            int val2 = mp2.get(key);
+            if(val1 != val2) return false;
         }
         return true;
     }
