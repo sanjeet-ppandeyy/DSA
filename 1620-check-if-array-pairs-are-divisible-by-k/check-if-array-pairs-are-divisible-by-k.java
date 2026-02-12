@@ -14,10 +14,7 @@ class Solution {
             if(map.get(0)%2 != 0) return false;
             map.remove(0);
         }
-        if(k%2==0 && map.containsKey(k/2)){
-            if(map.get(k/2)%2 != 0) return false;
-            map.remove(k/2);
-        }
+        
         for(int key : map.keySet()){
             int rem = k - key;
             if(!map.containsKey(rem)) return false;
