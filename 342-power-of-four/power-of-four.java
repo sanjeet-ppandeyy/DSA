@@ -1,7 +1,10 @@
 class Solution {
+    public boolean isPerfectSqrt(int n) {
+        int root = (int)(Math.sqrt(n));
+        return (root*root == n);
+    }
     public boolean isPowerOfFour(int n) {
-        if(n==1) return true;
-        if(n<=0 || n%4 != 0) return false;
-        return isPowerOfFour(n/4);
+        if(n<=0) return false;
+        return ((n & (n-1)) == 0)  && isPerfectSqrt(n);
     }
 }
