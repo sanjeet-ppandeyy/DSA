@@ -1,11 +1,11 @@
 class Solution {
-    public int steps(int n, int[] dp){
-        if(n==1 || n == 2) return n;
-        if(dp[n] != 0) return dp[n];
-        return dp[n] = steps(n-1,dp) + steps(n-2,dp);
-    }
     public int climbStairs(int n) {
-        int[] dp = new int[n+1];
-        return steps(n,dp);
+        if(n==1 || n==2) return n;
+        int[] dp = new int[n + 1];
+        dp[1] = 1; dp[2] = 2;
+        for(int i=3; i<=n; i++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
     }
 }
