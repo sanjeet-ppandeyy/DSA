@@ -1,16 +1,9 @@
 class Solution {
-    public void bfs(int i, boolean[] visit, int[][] isConnected){
-        int n = isConnected.length;
+    public void dfs(int i, boolean[] visit, int[][] isConnected) {
         visit[i] = true;
-        Queue<Integer> q = new LinkedList<>();
-        q.add(i);
-        while(q.size()>0){
-            int top = q.remove();
-            for(int j=0; j<n; j++){
-                if(isConnected[top][j] == 1 && !visit[j]){
-                    q.add(j);
-                    visit[j] = true;
-                }
+        for (int j = 0; j < isConnected.length; j++) {
+            if (isConnected[i][j] == 1 && !visit[j]) {
+                dfs(j,visit,isConnected);
             }
         }
     }
@@ -18,9 +11,9 @@ class Solution {
         int n = isConnected.length;
         boolean[] visit = new boolean[n];
         int count = 0;
-        for(int i=0; i<n; i++){
-            if(!visit[i]){
-                bfs(i,visit,isConnected);
+        for (int i = 0; i < n; i++) {
+            if (!visit[i]) {
+                dfs(i, visit, isConnected);
                 count++;
             }
         }
