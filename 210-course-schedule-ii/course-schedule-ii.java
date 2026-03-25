@@ -1,51 +1,36 @@
 class Solution {
-    public void bfs(int[] inDeg, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> arr) {
-        int n = inDeg.length;
-        Queue<Integer> q = new LinkedList<>();
-        for (int j = 0; j < n; j++) {
-            if (inDeg[j] == 0)
-                q.add(j);
+    public int[] findOrder(int n, int[][] pre) {
+        List<List<Integer>> adj = new ArrayList<>();
+        for (int i=0; i<n; i++) adj.add(new ArrayList<>());
+        int [] indegree = new int[n];
+        for (int i=0; i<pre.length; i++){
+            int a = pre[i][0];
+            int b = pre[i][1];
+            adj.get(b).add(a);
+            indegree[a]++;
         }
-        while (!q.isEmpty()) {
-            int front = q.remove();
-            arr.add(front);
-            for (int ele : adj.get(front)) {
-                inDeg[ele]--;
-                if (inDeg[ele] == 0) {
+        Queue<Integer> q = new LinkedList<>();
+        List<Integer> ans = new ArrayList<>();
+        for (int i=0; i<n; i++){
+            if (indegree[i] == 0) {
+                q.add(i);
+            }
+        }
+        while (q.size()>0){
+            int top = q.remove();
+            ans.add(top);
+            for (int ele : adj.get(top)){
+                indegree[ele]--;
+                if(indegree[ele] == 0){
                     q.add(ele);
                 }
             }
         }
-    }
-    public int[] findOrder(int n, int[][] edges) {
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        int edge = edges.length;
-        for (int i = 0; i < n; i++) {
-            ArrayList<Integer> arr = new ArrayList<>();
-            adj.add(arr);
+        if (ans.size() != n) return new int[0];
+        int[] res = new int[ans.size()];
+        for(int i=0; i<ans.size(); i++){
+            res[i] = ans.get(i);
         }
-        for (int i = 0; i < edge; i++) {
-            int x = edges[i][0];
-            int y = edges[i][1];
-            adj.get(y).add(x);
-        }
-        int[] inDeg = new int[n];
-        for (int u = 0; u < n; u++) {
-            for (int v : adj.get(u)) {
-                inDeg[v]++;
-            }
-        }
-        boolean check = false;
-        int[] ans = new int[n];
-        ArrayList<Integer> arr = new ArrayList<>();
-        bfs(inDeg, adj, arr);
-        if(n != arr.size()) return new int[]{};
-        if(n == arr.size()){
-            int idx = 0;
-            for(int ele : arr){
-                ans[idx++] = ele;
-            }
-        }
-        return ans;
+        return res;
     }
 }
