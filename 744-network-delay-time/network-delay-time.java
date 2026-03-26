@@ -31,6 +31,7 @@ class Solution {
             Pair top = pq.remove();
             int node = top.node;
             int dis = top.dis;
+            if(dis > ans[node]) continue;
             for (Pair p : adj.get(node)){
                 int adjNode = p.node;
                 int weight = p.dis;
