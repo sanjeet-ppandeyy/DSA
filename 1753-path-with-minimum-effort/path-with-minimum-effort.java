@@ -28,7 +28,7 @@ class Solution {
         while (pq.size() > 0){
             Triplet top = pq.remove();
             int row = top.row, col = top.col, dist = top.dist;
-
+            if(row == m-1 && col == n-1) return dist;
             if(row > 0){ // going up row-1
                 int e = Math.abs(heights[row][col] - heights[row-1][col]);
                 e = Math.max(e,dist);
