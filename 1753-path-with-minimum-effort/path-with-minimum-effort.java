@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Triplet implements Comparable<Triplet>{
     int row;
     int col;
