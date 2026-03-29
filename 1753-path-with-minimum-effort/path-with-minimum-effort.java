@@ -23,42 +23,24 @@ class Solution {
         int [][] effort = new int[m][n];
         for (int i=0; i<m; i++) Arrays.fill(effort[i],Integer.MAX_VALUE);
         effort[0][0] = 0;
+
+        int[] r = {-1,0,1,0};
+        int[] c = {0,-1,0,1};
+
         PriorityQueue<Triplet> pq = new PriorityQueue<>();
         pq.add(new Triplet(0,0,0));
-        while (pq.size() > 0){
+        while (pq.size() > 0) {
             Triplet top = pq.remove();
             int row = top.row, col = top.col, dist = top.dist;
-            if(row == m-1 && col == n-1) return dist;
-            if(row > 0){ // going up row-1
-                int e = Math.abs(heights[row][col] - heights[row-1][col]);
-                e = Math.max(e,dist);
-                if(e < effort[row-1][col]){
-                    effort[row-1][col] = e;
-                    pq.add(new Triplet(row-1,col,e));
-                }
-            }
-            if(col > 0){ // going left col-1
-                int e = Math.abs(heights[row][col] - heights[row][col-1]);
-                e = Math.max(e,dist);
-                if(e < effort[row][col-1]){
-                    effort[row][col-1] = e;
-                    pq.add(new Triplet(row,col-1,e));
-                }
-            }
-            if(row < m-1){ // going down col-1
-                int e = Math.abs(heights[row][col] - heights[row+1][col]);
-                e = Math.max(e,dist);
-                if(e < effort[row+1][col]){
-                    effort[row+1][col] = e;
-                    pq.add(new Triplet(row+1,col,e));
-                }
-            }
-            if(col < n-1){ // going Right col-1
-                int e = Math.abs(heights[row][col] - heights[row][col+1]);
-                e = Math.max(e,dist);
-                if(e < effort[row][col+1]){
-                    effort[row][col+1] = e;
-                    pq.add(new Triplet(row,col+1,e));
+            for (int i = 0; i < 4; i++) {
+                int newRow = row + r[i];
+                int newCol = col + c[i];
+                if(newRow<0 || newCol<0 || newRow>m-1 || newCol>n-1) continue;
+                int e = Math.abs(heights[row][col] - heights[newRow][newCol]);
+                e = Math.max(e, dist);
+                if (e < effort[newRow][newCol]) {
+                    effort[newRow][newCol] = e;
+                    pq.add(new Triplet(newRow, newCol, e));
                 }
             }
         }
