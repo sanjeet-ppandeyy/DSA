@@ -25,12 +25,12 @@ class Solution {
             Triplet top = pq.remove();
             int node = top.node;
             int cost = top.cost;
-
             if (vis[node]) continue;
             vis[node] = true;
             sum += cost;
 
             for(int i=0; i<points.length; i++){
+                if(i==node) continue;
                 int x1 = points[node][0], y1 = points[node][1];
                 int x2 = points[i][0], y2 = points[i][1];
                 int mDis = Math.abs(x2-x1) + Math.abs(y2-y1);
