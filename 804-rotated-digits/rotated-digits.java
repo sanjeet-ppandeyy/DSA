@@ -7,7 +7,7 @@ class Solution {
         return count;
     }
     public boolean valid(int num) {
-        boolean changed = false;
+        boolean flag = false;
         while (num > 0) {
             int digit = num % 10;
             if (digit == 3 || digit == 4 || digit == 7) {
@@ -15,10 +15,10 @@ class Solution {
             }
 
             if (digit == 2 || digit == 5 || digit == 6 || digit == 9) {
-                changed = true;
+                flag = true;
             }
             num /= 10;
         }
-        return changed;
+        return flag;
     }
 }
