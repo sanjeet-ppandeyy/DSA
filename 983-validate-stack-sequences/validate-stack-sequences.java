@@ -11,7 +11,6 @@ class Solution {
                 j++;
             }
         }
-        if(st.size() == 0) return true;
-        return false;
+        return st.size() == 0;
     }
 }
