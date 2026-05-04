@@ -7,7 +7,7 @@ class Solution {
             if(ch == '[') count++;
             else count--;
 
-            if(count < 0) balance = Math.max(balance,-count);
+            if(count < 0) balance = Math.max(balance,Math.abs(count));
         }
         return (balance + 1) / 2;
     }
