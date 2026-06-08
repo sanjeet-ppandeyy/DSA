@@ -5,10 +5,11 @@ class Solution {
             int first = bookings[i][0];
             int last = bookings[i][1];
             int add = bookings[i][2];
-
-            for(int j=first-1; j<=last-1; j++){
-                ans[j] += add;
-            }
+            ans[first-1] += add;
+            if(last < n) ans[last] -= add; 
+        }
+        for(int i=1; i<n; i++){
+            ans[i] += ans[i-1];
         }
         return ans;
     }
