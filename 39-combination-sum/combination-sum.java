@@ -8,7 +8,8 @@ class Solution {
             ans.add(new ArrayList<>(list));
             return;
         }
-        if (start >= candidates.length || sum > target) return;
+        if (start >= candidates.length)  return;
+
             if (sum + candidates[start] <= target) {
                 list.add(candidates[start]);
                 helper(start, sum + candidates[start], candidates, target, list);
