@@ -1,11 +1,11 @@
 class Solution {
-    public void helper(int n,int l, int r, String s,List<String> ans){
-        if(r == n){
+    public void helper(int n,int open, int close, String s,List<String> ans){
+        if(close == n){
             ans.add(s);
             return;
         }
-        if(l < n) helper(n,l+1,r,s+'(',ans);
-        if(r < l) helper(n,l,r+1,s+')',ans);
+        if(open < n) helper(n,open+1,close,s+'(',ans);
+        if(close < open) helper(n,open,close+1,s+')',ans);
     }
     public List<String> generateParenthesis(int n) {
         List<String> ans = new ArrayList<>();
