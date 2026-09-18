@@ -1,4 +1,5 @@
 class Solution {
+    static int check = 0;
     public boolean isValid(int row, int col, char[][] board, char num) {
         for (int i = 0; i < 9; i++) {
             if(board[i][col] == num) return false;
@@ -15,35 +16,28 @@ class Solution {
         }
         return true;
     }
-    public void solve(char[][] board, int row, int col, char[][] arr) {
+    public void solve(char[][] board, int row, int col) {
         if(row == 9){
-            for(int i=0;i<9;i++){
-                for(int j=0;j<9;j++){
-                    arr[i][j] = board[i][j];
-                }
-            }
+           check = 1;
+           return;
         }
         else if(board[row][col] != '.') {
-            if(col != 8) solve(board, row, col+1,arr);
-            else solve(board, row+1, 0,arr);
+            if(col != 8) solve(board, row, col+1);
+            else solve(board, row+1, 0);
         }else{
             for(char ch='1'; ch<='9';ch++){
                 if (isValid(row, col, board, ch)) {
                     board[row][col] = ch;
-                    if(col != 8) solve(board, row, col+1,arr);
-                    else solve(board, row+1, 0,arr);
+                    if(col != 8) solve(board, row, col+1);
+                    else solve(board, row+1, 0);
+                    if(check == 1) return;
                     board[row][col] = '.';
                 }
             }
         }
     }
     public void solveSudoku(char[][] board) {
-        char[][] arr = new char[9][9];
-        solve(board, 0, 0, arr);
-        for(int i=0;i<9;i++){
-            for(int j=0;j<9;j++){
-                board[i][j] = arr[i][j];
-            }
-        }
+        solve(board, 0, 0);
+        check = 0;
     }
 }
