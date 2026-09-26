@@ -1,12 +1,14 @@
 class Solution {
-    public static int helper(int sr, int sc, int m, int n,int[][] dp){
-        if(sr >= m || sc >= n) return 0;
-        if(sr==m-1 && sc==n-1) return 1;
-        if(dp[sr][sc] != 0) return dp[sr][sc];
-        return dp[sr][sc] = helper(sr,sc+1,m,n,dp) + helper(sr+1,sc,m,n,dp);
+    public int helper(int m, int n,int[][] dp){
+        if(m==1 || n==1) return 1;
+        if(dp[m-1][n-1] != -1) return dp[m-1][n-1];
+        return dp[m-1][n-1] = helper(m-1,n,dp) + helper(m,n-1,dp);
     }
     public int uniquePaths(int m, int n) {
         int[][] dp = new int[m][n];
-        return helper(0,0,m,n,dp);
+        for(int i = 0; i < m; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+        return helper(m,n,dp);
     }
 }
