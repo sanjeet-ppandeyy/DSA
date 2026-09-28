@@ -16,6 +16,8 @@ class Solution {
         for (char ch : st) {
             ans.append(ch);
         }
+        System.out.println(st);
+        System.out.println(ans);
         return ans.toString();
     }
 }
