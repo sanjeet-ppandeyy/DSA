@@ -6,11 +6,16 @@ class Solution {
             dp[1][j] = 1;
         }
         for(int i=1; i<=m-1; i++){
-            for(int j=1; j<n; j++){
-                dp[1][j] = dp[1][j-1] + dp[0][j];
+            if(i % 2 == 0){
+                for(int j=1; j<n; j++){
+                    dp[1][j] = dp[1][j-1] + dp[0][j];
+                } 
+            }else {
+                for(int j=1; j<n; j++){
+                    dp[0][j] = dp[0][j-1] + dp[1][j];
+                }
             }
-            for(int j=1; j<n; j++) dp[0][j] = dp[1][j];
         }
-        return dp[1][n-1];
+        return Math.max(dp[1][n-1],dp[0][n-1]);
     }
 }
