@@ -1,7 +1,6 @@
 import java.util.Arrays;
 
 class Solution {
-
     public int numDecodings(String s) {
         int[] dp = new int[s.length()+1];
         Arrays.fill(dp,-1);
