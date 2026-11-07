@@ -1,16 +1,18 @@
 class Solution {
-    boolean flag = false;
-    public int level(TreeNode root){
+    Map<TreeNode,Integer> map = new HashMap<>();
+    public int height(TreeNode root){
         if(root == null) return 0;
-        int left = level(root.left);
-        int right = level(root.right);
-        if(Math.abs(left - right) > 1) flag = false;
-        return 1 + Math.max(left,right);
+        if(map.containsKey(root)) return map.get(root);
+        int ans = 1 + Math.max(height(root.left),height(root.right));
+        map.put(root,ans);
+        return ans;
     }
     public boolean isBalanced(TreeNode root) {
         if(root == null) return true;
-        flag = true;
-        level(root);
-        return flag;
+        int left = height(root.left);
+        int right = height(root.right);
+        int diff = Math.abs(left-right);
+        if(diff > 1) return false;
+        return isBalanced(root.left) && isBalanced(root.right);
     }
 }
