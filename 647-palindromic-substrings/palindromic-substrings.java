@@ -1,19 +1,22 @@
 class Solution {
-    public boolean isPalindrome(String str) {
-        int i = 0;
-        int j = str.length() - 1;
-        while (i < j) {
-            if (str.charAt(i) != str.charAt(j)) return false;
-            i++;
-            j--;
-        }
-        return true;
-    }
     public int countSubstrings(String s) {
+        int n = s.length();
         int count = 0;
-        for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j < s.length(); j++) {
-                if(isPalindrome(s.substring(i, j+1))) count++;
+        int[][] dp = new int[n][n];
+        for(int k=0; k<n; k++){
+            int i=0, j=k;
+            while(j < n){
+                if(i==j) dp[i][j] = 1;
+                else if(j==i+1){
+                    if(s.charAt(i) == s.charAt(j)) dp[i][j] = 1;
+                }else{
+                    if(s.charAt(i) == s.charAt(j)){
+                        if(dp[i+1][j-1] == 1) dp[i][j] = 1;
+                    }
+                }
+                if(dp[i][j] == 1) count++;
+                i++;
+                j++;
             }
         }
         return count;
