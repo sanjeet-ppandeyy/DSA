@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 class Solution {
     public int helper(int i, int[] costs,int[] dp){
         int n = costs.length;
