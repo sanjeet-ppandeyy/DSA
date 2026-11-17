@@ -1,18 +1,18 @@
 import java.util.*;
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        int n = nums.length;
-        int[] dp = new int[n];
-        Arrays.fill(dp, 1);
-        int ans = 1;
-        for(int i = 1; i < n; i++){
-            for(int j = i-1; j >= 0; j--){
-                if(nums[i] > nums[j]){
-                    dp[i] = Math.max(dp[i], dp[j]+1);
-                }
-                ans = Math.max(ans,dp[i]);
+        List<Integer> dp = new ArrayList<>();
+        for(int i=0; i<nums.length; i++){
+            int lo = 0;
+            int hi = dp.size();
+            while(lo<hi){
+                int mid = lo+(hi-lo)/2;
+                if(dp.get(mid) < nums[i]) lo = mid+1;
+                else hi = mid;
             }
+            if(lo == dp.size()) dp.add(nums[i]);
+            else dp.set(lo, nums[i]);
         }
-        return ans;
+        return dp.size();
     }
 }
